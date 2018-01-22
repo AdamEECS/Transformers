@@ -1,3 +1,4 @@
 example*.*
 *.wav
 *.mp3
+.idea/*
