@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>player</title>
+</head>
+
+<body>
+    <div id='menu'>
+        <a href="#">file:///Users/san/eecs/操作系统/20171202 操作系统 01.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/操作系统/20171202 操作系统 02.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/操作系统/20180106 操作系统 03.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/操作系统/20180113 操作系统 上午 04.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/操作系统/20180113 操作系统 下午 05.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/操作系统/20180311 操作系统  06.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/操作系统/20180317 操作系统  07.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/操作系统/20180324 操作系统  08.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/操作系统/20180331 操作系统  09.mp3</a><br>
+    </div>
+    <video controls="" autoplay="" name="media" width="100%">
+        <source src="file:///Users/san/eecs/操作系统/20171202 操作系统 01.mp3" type="audio/mp3">
+    </video>
+</body>
+<script type="text/javascript">
+    const log = console.log.bind(console)
+
+    const round = function(number, precision) {
+        return Math.round(+number + 'e' + precision) / Math.pow(10, precision);
+    }
+
+    var player = document.querySelector('video')
+
+    var menu = document.querySelectorAll('#menu a')
+    for (let e of menu) {
+        e.addEventListener('click', (event) => {
+            log(e.text)
+            player.src = e.text
+        }, false)
+    }
+
+    document.addEventListener('keydown', (event) => {
+        const keyName = event.key;
+
+        if (keyName === 'Control') {
+            return;
+        }
+
+        if (event.ctrlKey) {
+            log(`Combination of ctrlKey + ${keyName}`);
+        } else {
+            log(`Key pressed ${keyName} ${event.keyCode}`);
+        }
+
+        if (keyName == 'c') {
+            player.playbackRate = round(player.playbackRate + 0.2, 1)
+            log(player.playbackRate)
+        }
+        if (keyName == 'x') {
+            player.playbackRate = round(player.playbackRate - 0.2, 1)
+            log(player.playbackRate)
+        }
+        if (keyName == 'ArrowRight') {
+            player.currentTime = round(player.currentTime + 5, 1)
+            log(player.currentTime)
+        }
+        if (keyName == 'ArrowLeft') {
+            player.currentTime = round(player.currentTime - 5, 1)
+            log(player.currentTime)
+        }
+        if (keyName == '.') {
+            player.currentTime = round(player.currentTime + 30, 1)
+            log(player.currentTime)
+        }
+        if (keyName == ',') {
+            player.currentTime = round(player.currentTime - 30, 1)
+            log(player.currentTime)
+        }
+        if (keyName == 'ArrowUp') {
+            player.volume = round(player.volume + 0.1, 1)
+            log(player.volume)
+        }
+        if (keyName == 'ArrowDown') {
+            player.volume = round(player.volume - 0.1, 1)
+            log(player.volume)
+        }
+        if (event.keyCode == 32) {
+            if (player.paused == false) {
+                player.pause()
+                log('pause')
+            } else {
+                player.play()
+                log('play')
+            }
+        }
+    }, false);
+</script>
+
+</html>
