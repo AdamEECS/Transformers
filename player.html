@@ -4,6 +4,14 @@
 <head>
     <meta charset="utf-8">
     <title>player</title>
+    <style media="screen">
+        #video {
+            position: fixed;
+            height: 10px;
+            width: 100%;
+            bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,10 +25,26 @@
         <a href="#">file:///Users/san/eecs/操作系统/20180317 操作系统  07.mp3</a><br>
         <a href="#">file:///Users/san/eecs/操作系统/20180324 操作系统  08.mp3</a><br>
         <a href="#">file:///Users/san/eecs/操作系统/20180331 操作系统  09.mp3</a><br>
+        <br>
+        <a href="#">file:///Users/san/eecs/图形学/20171126 图形学01.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/图形学/20171203 图形学02.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/图形学/20171210 图形学03.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/图形学/20171217 图形学04.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/图形学/20180107 图形学05.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/图形学/20180114 图形学06.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/图形学/20180311 图形学07.mp3</a><br>
+        <a href="#">file:///Users/san/eecs/图形学/20180325 图形学08.mp3</a><br>
+        <br>
     </div>
-    <video controls="" autoplay="" name="media" width="100%">
+    <video controls="" autoplay="" name="media" id="video">
         <source src="file:///Users/san/eecs/操作系统/20171202 操作系统 01.mp3" type="audio/mp3">
     </video>
+    <div id='video-panel'>
+        当前播放：
+        <span id='video-title'>
+            file:///Users/san/eecs/操作系统/20171202 操作系统 01.mp3
+        </div>
+    </div>
 </body>
 <script type="text/javascript">
     const log = console.log.bind(console)
@@ -30,11 +54,13 @@
     }
 
     var player = document.querySelector('video')
+    var title = document.querySelector('#video-title')
 
     var menu = document.querySelectorAll('#menu a')
     for (let e of menu) {
         e.addEventListener('click', (event) => {
             log(e.text)
+            title.innerText = e.text
             player.src = e.text
         }, false)
     }
